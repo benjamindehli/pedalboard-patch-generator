@@ -1,0 +1,19 @@
+{
+  "name": "pedalboard-patch-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamindehli/pedalboard-patch-generator.git"
+  },
+  "author": "Benjamin Dehli <superelg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benjamindehli/pedalboard-patch-generator/issues"
+  },
+  "homepage": "https://github.com/benjamindehli/pedalboard-patch-generator#readme"
+}
