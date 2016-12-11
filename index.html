@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pedalboard Patch Generator</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/main.min.css" />
+	<script src="assets/js/main.min.js"></script>
+</head>
+<body>
+	<div id="app" class="main-content">
+		<div class="container">
+			<div class="content">
+				<div class="row">
+					<effect-item v-for="effect in effects" v-bind:effect="effect" v-bind:effects="effects" class="col-xs-12 col-sm-6 col-md-4">
+					</effect-item>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<template id="effect-item">
+		<div>
+			<div class="box primary z-1">
+				<div class="box-header">
+					<div class="content">
+						<h3 class="box-title">{{ effect.brand }} <small>{{ effect.model }}</small></h3>
+					</div>
+				</div>
+				<div class="content">
+					<p>Inputs</p>
+					<div v-for="input in effect.inputs">
+						<div class="input-group">
+							<select>
+								<optgroup v-for="effect in effects" v-bind:label="effect.brand + ' ' + effect.model">
+									<option v-for="output in effect.outputs">{{ output }}</option>
+								</optgroup>
+							</select>
+							<label>{{ input }}</label>
+						</div>
+					</div>
+					<p>Outputs</p>
+					<div v-for="output in effect.outputs">
+						<div class="input-group">
+							<select>
+								<optgroup v-for="effect in effects" v-bind:label="effect.brand + ' ' + effect.model">
+									<option v-for="input in effect.inputs">{{ input }}</option>
+								</optgroup>
+							</select>
+							<label>{{ output }}</label>
+						</div>
+					</div>
+					<div v-if="effect.parameters.dials">
+						<p>Switches</p>
+						<div v-for="dial in effect.parameters.dials">
+							<div class="input-group">
+								<select>
+									<option v-for="option in dial.options">{{ option }}</option>
+								</select>
+								<label>{{ dial.name }}</label>
+							</div>
+						</div>
+					</div>
+					<p>Potentiometers</p>
+					<div v-for="potentiometer in effect.parameters.potentiometers">
+						<div class="input-group">
+							<input type="range" min="0" max="100" /><label>{{ potentiometer.name }}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+	
+	<script>
+		Vue.component('effect-item', {
+			props: ['effect', 'effects'],
+			template: '#effect-item'
+		})
+
+
+		var app2 = new Vue({
+			el: '#app',
+			data: {
+				effects: [
+				{ 
+					brand: 'Electro-Harmonix',
+					model: 'Deluxe Memory Man',
+					parameters: {
+						dials: [
+						{
+							name: "Chorus-Vibrato",
+							options: [
+							"chorus",
+							"vibrato"
+							]
+						}
+						],
+						potentiometers: [
+						{
+							name: "Level",
+							value: "0"
+						},
+						{
+							name: "Blend",
+							value: "0"
+						},
+						{
+							name: "Feedback",
+							value: "0"
+						},
+						{
+							name: "Delay",
+							value: "0"
+						},
+						{
+							name: "Chorus-Vibrato",
+							value: "0"
+						}
+						]
+
+					},
+					inputs: [
+					"Input"
+					],
+					outputs: [
+					"Echo out",
+					"Direct out"
+					]
+				},
+				{ 
+					brand: 'Origin Effects',
+					model: 'Cali76',
+					parameters: {
+						potentiometers: [
+						{
+							name: "Ratio",
+							value: "0"
+						},
+						{
+							name: "Attack",
+							value: "0"
+						},
+						{
+							name: "Release",
+							value: "0"
+						},
+						{
+							name: "Output",
+							value: "0"
+						},
+						{
+							name: "Input/Comp",
+							value: "0"
+						}
+						]
+
+					},
+					inputs: [
+					"Instrument"
+					],
+					outputs: [
+					"Amplifier"
+					]
+				}
+				]
+			}
+		})
+	</script>
+</body>
+</html>
