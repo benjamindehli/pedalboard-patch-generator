@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/benjamindehli/pedalboard-patch-generator/issues"
   },
-  "homepage": "https://github.com/benjamindehli/pedalboard-patch-generator#readme"
+  "homepage": "https://github.com/benjamindehli/pedalboard-patch-generator#readme",
+  "devDependencies": {
+    "vue": "^2.1.4"
+  }
 }
