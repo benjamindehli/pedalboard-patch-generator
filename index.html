@@ -3,7 +3,7 @@
 <head>
 	<title>Pedalboard Patch Generator</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/main.min.css" />
-	<script src="assets/js/main.min.js"></script>
+	<script src="assets/js/main.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-dark z-2">
@@ -67,27 +67,33 @@
 					<div v-for="input in effect.inputs">
 						<div class="input-group">
 							<select>
-								<optgroup v-for="effect in effects" v-bind:label="effect.brand + ' ' + effect.model">
-									<option v-for="output in effect.outputs">{{ output }}</option>
+								<option>Unplugged</option>
+								<optgroup v-for="(effect, effectIndex) in effects" v-bind:label="effect.brand + ' ' + effect.model">
+									<option is="input-option" v-for="output in effect.outputs" v-bind:effect-index="effectIndex" v-bind:connected-to="output"></option>
+									<!--<option v-for="output in effect.outputs" v-bind:value="{'index': effectIndex, 'connectedTo': output}">
+										{{ output.name }}
+									</option> -->
 								</optgroup>
 							</select>
-							<label>{{ input }}</label>
+							<label>{{ input.name }}</label>
 						</div>
 					</div>
 					<p>Outputs</p>
 					<div v-for="output in effect.outputs">
 						<div class="input-group">
 							<select>
-								<optgroup v-for="effect in effects" v-bind:label="effect.brand + ' ' + effect.model">
-									<option v-for="input in effect.inputs">{{ input }}</option>
+								<option>Unplugged</option>
+								<optgroup v-for="(effect, effectIndex) in effects" v-bind:label="effect.brand + ' ' + effect.model">
+									<option is="output-option" v-for="input in effect.inputs" v-bind:effect-index="effectIndex" v-bind:connected-to="input"></option>
+									<!--<option v-for="input in effect.inputs" v-bind:value="{'index': effectIndex, 'connectedTo': input}">{{ input.name }}</option>-->
 								</optgroup>
 							</select>
-							<label>{{ output }}</label>
+							<label>{{ output.name }}</label>
 						</div>
 					</div>
-					<div v-if="effect.parameters.dials">
+					<div v-if="effect.parameters.switches">
 						<p>Switches</p>
-						<div v-for="dial in effect.parameters.dials">
+						<div v-for="dial in effect.parameters.switches">
 							<div class="input-group">
 								<select>
 									<option v-for="option in dial.options">{{ option }}</option>
@@ -106,99 +112,82 @@
 			</div>
 		</div>
 	</template>
-	
+
 	<script>
+		function loadJSON(callback, path) {
+			var xobj = new XMLHttpRequest();
+			xobj.overrideMimeType("application/json");
+			xobj.open('GET', path, false);
+			xobj.onreadystatechange = function () {
+				if (xobj.readyState == 4 && xobj.status == "200") {
+					callback(xobj.responseText);
+				}
+			};
+			xobj.send(null);
+			return JSON.parse(xobj.responseText);
+		}
+
+		function getJsonFile(path) {
+			var response = loadJSON(function (response) {
+				var jsonResponse = JSON.parse(response);
+			}, path);
+			return response;
+		}
+	</script>
+
+	<script>
+		
+
 		Vue.component('effect-item', {
 			props: ['effect', 'effects'],
-			template: '#effect-item'
+			template: '#effect-item',
+			components: {
+				'input-option': {
+					props: ['effectIndex', 'connectedTo'],
+					template: '<option>{{ connectedTo.name }}</option>'
+				},
+				'output-option': {
+					props: ['effectIndex', 'connected-to'],
+					template: '<option>{{ connectedTo.name }}</option>'
+				}
+			}
 		})
 
 
 		var app2 = new Vue({
 			el: '#app',
 			data: {
-				effects: [
-				{ 
-					brand: 'Electro-Harmonix',
-					model: 'Deluxe Memory Man',
-					parameters: {
-						dials: [
-						{
-							name: "Chorus-Vibrato",
-							options: [
-							"chorus",
-							"vibrato"
-							]
-						}
-						],
-						potentiometers: [
-						{
-							name: "Level",
-							value: "0"
-						},
-						{
-							name: "Blend",
-							value: "0"
-						},
-						{
-							name: "Feedback",
-							value: "0"
-						},
-						{
-							name: "Delay",
-							value: "0"
-						},
-						{
-							name: "Chorus-Vibrato",
-							value: "0"
-						}
-						]
-
-					},
-					inputs: [
-					"Input"
-					],
-					outputs: [
-					"Echo out",
-					"Direct out"
-					]
+				selectedEffects: [
+				{
+					"id": "electro-harmonix-deluxe-memory-man",
+					"name": "Electro-Harmonix Deluxe Memory Man"
 				},
-				{ 
-					brand: 'Origin Effects',
-					model: 'Cali76',
-					parameters: {
-						potentiometers: [
-						{
-							name: "Ratio",
-							value: "0"
-						},
-						{
-							name: "Attack",
-							value: "0"
-						},
-						{
-							name: "Release",
-							value: "0"
-						},
-						{
-							name: "Output",
-							value: "0"
-						},
-						{
-							name: "Input/Comp",
-							value: "0"
-						}
-						]
-
-					},
-					inputs: [
-					"Instrument"
-					],
-					outputs: [
-					"Amplifier"
-					]
+				{
+					"id": "origin-effects-cali76",
+					"name": "Origin Effects Cali 76"
+				},
+				{
+					"id": "diamond-memory-lane-2",
+					"name": "Diamond Memory Lane 2"
 				}
-				]
+				],
+			},
+			methods: {
+				getJsonData: function (path) {
+					var jsonData = loadJSON(function (response) {
+						var jsonResponse = JSON.parse(response);
+					}, path);
+					return jsonData;
+				}
+			},
+			computed: {
+				effects: function(){
+					var effects = [];
+					this.selectedEffects.forEach(function(selectedEffect){
+						effects.push(this.getJsonData("json/effects/" + selectedEffect.id + ".json"));
+					}.bind(this));
+					return effects;
+				}
 			}
 		})
 	</script>
