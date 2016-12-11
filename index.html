@@ -6,14 +6,51 @@
 	<script src="assets/js/main.min.js"></script>
 </head>
 <body>
+	<nav class="navbar navbar-dark z-2">
+		<a class="sidenav-toggle"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
+		<a class="logo" href="/dashboard" style="font-size: 16pt; line-height: 43px;">
+			<!--<img src="#" alt="App logo"> -->
+			App Name
+		</a>
+	</nav>
+	<div class="left-menu no-padding">
+		<div>
+			<div class="sidenav-logo"></div>
+			<ul>
+				<li>
+					<a href="#">Instruments</a>
+					<a href="#">Effects</a>
+					<a href="#">Amplifiers</a>
+					<a href="#">Patches</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div id="app" class="main-content">
 		<div class="container">
 			<div class="content">
-				<div class="row">
-					<effect-item v-for="effect in effects" v-bind:effect="effect" v-bind:effects="effects" class="col-xs-12 col-sm-6 col-md-4">
-					</effect-item>
+				<div class="box">
+					<div class="content">
+						<h1>Pedalboard Patch Generator</h1>
+						<div class="row">
+							<effect-item v-for="effect in effects" v-bind:effect="effect" v-bind:effects="effects" class="col-xs-12 col-sm-6 col-md-4">
+							</effect-item>
+							<div class="clearfix"></div>
+						</div>
+					</div>
 				</div>
 			</div>
+			<footer>
+				<div class="container">
+					<div class="text-center">
+						<img src="#" alt="App logo" style="width: 150px; opacity: .4;">
+						<p>App licensed under
+							<a href="https://github.com/benjamindehli/pedalboard-patch-generator/blob/master/LICENCE">GNU General Public License</a>
+						</p>
+						<p><a href="#">About</a> - <a href="#">Developers</a> - <a href="#">Send feedback</a></p>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</div>
 
@@ -22,7 +59,7 @@
 			<div class="box primary z-1">
 				<div class="box-header">
 					<div class="content">
-						<h3 class="box-title">{{ effect.brand }} <small>{{ effect.model }}</small></h3>
+						<h3 class="box-title">{{ effect.brand }}<br/> <small>{{ effect.model }}</small></h3>
 					</div>
 				</div>
 				<div class="content">
