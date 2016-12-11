@@ -1,0 +1,45 @@
+{ 
+	"brand": "Electro-Harmonix",
+	"model": "Deluxe Memory Man",
+	"parameters": {
+		"switches": [
+			{
+				"name": "Chorus-Vibrato",
+				"options": [
+					"chorus",
+					"vibrato"
+				]
+			}
+		],
+		"potentiometers": [
+			{
+				"name": "Level",
+				"value": "0"
+			},
+			{
+				"name": "Blend",
+				"value": "0"
+			},
+			{
+				"name": "Feedback",
+				"value": "0"
+			},
+			{
+				"name": "Delay",
+				"value": "0"
+			},
+			{
+				"name": "Chorus-Vibrato",
+				"value": "0"
+			}
+		]
+
+	},
+	"inputs": [
+		{"name": "Input"}
+	],
+	"outputs": [
+		{"name": "Echo out"},
+		{"name": "Direct out"}
+	]
+}

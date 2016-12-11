@@ -1,0 +1,35 @@
+{ 
+	"brand": "Origin Effects",
+	"model": "Cali76",
+	"parameters": {
+		"potentiometers": [
+			{
+				"name": "Ratio",
+				"value": "0"
+			},
+			{
+				"name": "Attack",
+				"value": "0"
+			},
+			{
+				"name": "Release",
+				"value": "0"
+			},
+			{
+				"name": "Output",
+				"value": "0"
+			},
+			{
+				"name": "Input/Comp",
+				"value": "0"
+			}
+		]
+
+	},
+	"inputs": [
+		{"name": "Instrument"}
+	],
+	"outputs": [
+		{"name": "Amplifier"}
+	]
+}

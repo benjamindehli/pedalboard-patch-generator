@@ -1,0 +1,56 @@
+{ 
+	"brand": "Diamond",
+	"model": "Memory Lane 2",
+	"parameters": {
+		"switches": [
+			{
+				"name": "Slapback",
+				"options": [
+					"On",
+					"Off"
+				]
+			},
+			{
+				"name": "Dotted 8th Note",
+				"options": [
+					"On",
+					"Off"
+				]
+			}
+		],
+		"potentiometers": [
+			{
+				"name": "Delay",
+				"value": "0"
+			},
+			{
+				"name": "Feedback EQ",
+				"value": "0"
+			},
+			{
+				"name": "Feedback Level",
+				"value": "0"
+			},
+			{
+				"name": "Modulation Speed",
+				"value": "0"
+			},
+			{
+				"name": "Modulation Depth",
+				"value": "0"
+			},
+			{
+				"name": "Mix",
+				"value": "0"
+			}
+		]
+
+	},
+	"inputs": [
+		{"name": "Input"}
+	],
+	"outputs": [
+		{"name": "Delay only"},
+		{"name": "Mix/Direct"}
+	]
+}
