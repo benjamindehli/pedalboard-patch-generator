@@ -5,7 +5,7 @@
   "authors": [
     "Benjamin Dehli <superelg@gmail.com>"
   ],
-  "license": "MIT",
+  "license": "GPL-3.0",
   "homepage": "https://github.com/benjamindehli/pedalboard-patch-generator",
   "private": true,
   "ignore": [
@@ -15,7 +15,5 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "simple-gui-template": "^0.2.7"
-  }
+  "devDependencies": {}
 }

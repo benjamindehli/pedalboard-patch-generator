@@ -1,0 +1,55 @@
+import * as quark from "quark-gui";
+
+let Header = quark.Organisms.Global.Header;
+
+
+let htmlContent = ``;
+
+let header = Header.getModule({
+	id: 'main-header',
+	theme: 'dark',
+	logo: {
+		image: {
+            src: '', //TODO: add logo 'src/images/svg/flowchord-logo-white.svg',
+            alt: 'logo'
+        },
+        url: "#"
+    },
+    htmlContent: htmlContent,
+    sidebar: {
+    	sidebarNavigation: {
+    		listItems: [
+    		{
+    			name: "Instruments",
+    			link: "",
+    			iconClass: ""
+    		},
+    		{
+    			name: "Effects",
+    			link: "",
+    			iconClass: ""
+    		},
+    		{
+    			name: "Amplifiers",
+    			link: "",
+    			iconClass: ""
+    		},
+            {
+                name: "Patches",
+                link: "",
+                iconClass: ""
+            }
+    		]
+    	}
+    }
+});
+
+
+
+let template = `
+<div>
+${header}
+</div>
+`;
+
+export default template;
